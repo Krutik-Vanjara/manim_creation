@@ -205,6 +205,8 @@
 
         galleryItems.forEach(item => {
             item.addEventListener('click', async () => {
+                console.log("Item clicked!"); // Debugging log
+                
                 const videoSrc = item.getAttribute('data-animation');
                 const codeFile = item.getAttribute('data-code');
                 const descriptionFile = item.getAttribute('data-description');
@@ -212,16 +214,32 @@
                 modalVideo.src = videoSrc;
 
                 // Fetch code from .py file (from GitHub raw link)
-                const codeResponse = await fetch(codeFile);
-                const codeText = await codeResponse.text();
-                codeBlock.textContent = codeText;
+                try {
+                    const codeResponse = await fetch(codeFile);
+                    if (codeResponse.ok) {
+                        const codeText = await codeResponse.text();
+                        codeBlock.textContent = codeText;
+                    } else {
+                        console.error('Failed to fetch code:', codeResponse.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error fetching code:', error);
+                }
 
                 // Fetch description from .txt file (from GitHub raw link)
-                const descriptionResponse = await fetch(descriptionFile);
-                const descriptionText = await descriptionResponse.text();
-                descriptionBlock.textContent = descriptionText;
+                try {
+                    const descriptionResponse = await fetch(descriptionFile);
+                    if (descriptionResponse.ok) {
+                        const descriptionText = await descriptionResponse.text();
+                        descriptionBlock.textContent = descriptionText;
+                    } else {
+                        console.error('Failed to fetch description:', descriptionResponse.statusText);
+                    }
+                } catch (error) {
+                    console.error('Error fetching description:', error);
+                }
 
-                modal.style.display = 'flex';
+                modal.style.display = 'flex'; // Show modal
             });
         });
 
@@ -243,6 +261,7 @@
     </script>
 </body>
 </html>
+
 
 
 
