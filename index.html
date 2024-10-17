@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -149,21 +149,29 @@
     <!-- Gallery Section -->
     <div class="gallery">
         <!-- Animation 1 -->
-        <div class="gallery-item" data-animation="Cup3DScene.mp4" data-code="Code for animation 1" data-description="This animation demonstrates...">
+        <div class="gallery-item" 
+             data-animation="Cup3DScene.mp4" 
+             data-code="https://github.com/Krutik-Vanjara/manim_creation/blob/main/cup_3d.py" 
+             data-description="https://github.com/Krutik-Vanjara/manim_creation/blob/main/cup3d.txt">
             <img class="thumbnail" src="Cup3d.png" alt="Thumbnail 1">
             <div class="overlay">Cup3DScene</div>
         </div>
         <!-- Animation 2 -->
-        <div class="gallery-item" data-animation="SolveLinearEquation.mp4" data-code="Code for animation 2" data-description="This animation illustrates...">
+        <div class="gallery-item" 
+             data-animation="SolveLinearEquation.mp4" 
+             data-code="https://raw.githubusercontent.com/your-username/your-repo/main/animation2.py" 
+             data-description="https://raw.githubusercontent.com/your-username/your-repo/main/description2.txt">
             <img class="thumbnail" src="thumbnail2.jpg" alt="Thumbnail 2">
-            <div class="overlay">Animation 2</div>
+            <div class="overlay">SolveLinearEquation</div>
         </div>
         <!-- Animation 3 -->
-        <div class="gallery-item" data-animation="GraphLinearEquation3D.mp4" data-code="Code for animation 3" data-description="This animation showcases...">
+        <div class="gallery-item" 
+             data-animation="GraphLinearEquation3D.mp4" 
+             data-code="https://raw.githubusercontent.com/your-username/your-repo/main/animation3.py" 
+             data-description="https://raw.githubusercontent.com/your-username/your-repo/main/description3.txt">
             <img class="thumbnail" src="thumbnail3.jpg" alt="Thumbnail 3">
-            <div class="overlay">Animation 3</div>
+            <div class="overlay">GraphLinearEquation3D</div>
         </div>
-        <!-- Add more animations as needed -->
     </div>
 
     <!-- Modal for showing video, code, and description -->
@@ -196,13 +204,21 @@
         const copyBtn = document.getElementById('copyBtn');
 
         galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
+            item.addEventListener('click', async () => {
                 const videoSrc = item.getAttribute('data-animation');
-                const codeText = item.getAttribute('data-code');
-                const descriptionText = item.getAttribute('data-description');
+                const codeFile = item.getAttribute('data-code');
+                const descriptionFile = item.getAttribute('data-description');
 
                 modalVideo.src = videoSrc;
+
+                // Fetch code from .py file (from GitHub raw link)
+                const codeResponse = await fetch(codeFile);
+                const codeText = await codeResponse.text();
                 codeBlock.textContent = codeText;
+
+                // Fetch description from .txt file (from GitHub raw link)
+                const descriptionResponse = await fetch(descriptionFile);
+                const descriptionText = await descriptionResponse.text();
                 descriptionBlock.textContent = descriptionText;
 
                 modal.style.display = 'flex';
@@ -227,6 +243,7 @@
     </script>
 </body>
 </html>
+
 
 
 
