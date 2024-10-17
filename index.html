@@ -13,7 +13,7 @@
             color: #262626;
         }
         header {
-            background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+            background: linear-gradient(45deg, #56ab2f, #2c3e50); /* Light green to navy blue gradient */
             color: white;
             padding: 20px;
             text-align: center;
@@ -39,10 +39,11 @@
         .gallery-item:hover {
             transform: scale(1.05);
         }
-        video {
+        .thumbnail {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
         .overlay {
             position: absolute;
@@ -89,7 +90,7 @@
             max-width: 80%;
         }
         .close-btn {
-            background-color: #f58529;
+            background-color: #56ab2f;
             color: white;
             border: none;
             padding: 10px;
@@ -104,7 +105,7 @@
             position: relative;
         }
         .copy-btn {
-            background-color: #515bd4;
+            background-color: #2c3e50;
             color: white;
             border: none;
             padding: 8px 12px;
@@ -125,17 +126,17 @@
     <div class="gallery">
         <!-- Animation 1 -->
         <div class="gallery-item" data-animation="Cup3DScene.mp4" data-code="Code for animation 1" data-description="This animation demonstrates...">
-            <video src="animation1.mp4"></video>
+            <img class="thumbnail" src="thumbnail1.jpg" alt="Thumbnail 1">
             <div class="overlay">Animation 1</div>
         </div>
         <!-- Animation 2 -->
         <div class="gallery-item" data-animation="SolveLinearEquation.mp4" data-code="Code for animation 2" data-description="This animation illustrates...">
-            <video src="animation2.mp4"></video>
+            <img class="thumbnail" src="thumbnail2.jpg" alt="Thumbnail 2">
             <div class="overlay">Animation 2</div>
         </div>
         <!-- Animation 3 -->
         <div class="gallery-item" data-animation="GraphLinearEquation3D.mp4" data-code="Code for animation 3" data-description="This animation showcases...">
-            <video src="animation3.mp4"></video>
+            <img class="thumbnail" src="thumbnail3.jpg" alt="Thumbnail 3">
             <div class="overlay">Animation 3</div>
         </div>
         <!-- Add more animations as needed -->
