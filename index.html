@@ -7,13 +7,13 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #ffffff; /* White background */
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
-            color: #333333; /* Dark gray text */
+            color: #333333;
         }
         header {
-            background-color: #000000; /* Black background */
+            background-color: #000000;
             color: white;
             padding: 20px;
             text-align: center;
@@ -22,9 +22,19 @@
             margin: 0;
             font-size: 2.5rem;
         }
+        .main-content {
+            padding: 20px;
+            height: 80vh; /* Adjust height based on content */
+            overflow-y: auto; /* Enable scrolling */
+        }
+        .section-header {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjusts based on screen size */
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 15px;
             padding: 20px;
         }
@@ -68,7 +78,7 @@
             text-align: center;
             padding: 10px;
             background-color: #ffffff;
-            color: #666666; /* Lighter gray */
+            color: #666666;
         }
         .modal {
             display: none;
@@ -83,7 +93,7 @@
             align-items: center;
         }
         .modal-content {
-            background: #ffffff; /* White background for the modal */
+            background: #ffffff;
             padding: 20px;
             border-radius: 8px;
             text-align: center;
@@ -96,7 +106,7 @@
             height: auto;
         }
         .close-btn {
-            background-color: #333333; /* Dark gray button */
+            background-color: #333333;
             color: white;
             border: none;
             padding: 10px;
@@ -104,14 +114,14 @@
             cursor: pointer;
         }
         .code-section {
-            background-color: #f0f0f0; /* Light gray for code section */
+            background-color: #f0f0f0;
             padding: 15px;
             border-radius: 8px;
             text-align: left;
             position: relative;
         }
         .copy-btn {
-            background-color: #000000; /* Black button */
+            background-color: #000000;
             color: white;
             border: none;
             padding: 8px 12px;
@@ -146,32 +156,51 @@
         <h1>Manim Animations Gallery</h1>
     </header>
 
-    <!-- Gallery Section -->
-    <div class="gallery">
-        <!-- Animation 1 -->
-        <div class="gallery-item" 
-             data-animation="Cup3DScene.mp4" 
-             data-code="https://raw.githubusercontent.com/Krutik-Vanjara/manim_creation/main/cup_3d.py" 
-             data-description="https://raw.githubusercontent.com/Krutik-Vanjara/manim_creation/main/cup3d.txt">
-            <img class="thumbnail" src="Cup3d.png" alt="Thumbnail 1">
-            <div class="overlay">Cup3DScene</div>
+    <!-- Main content area with scroll functionality -->
+    <div class="main-content">
+        
+        <!-- Section 1 -->
+        <h2 class="section-header">Section 1</h2>
+        <div class="gallery">
+            <!-- Animation 1 -->
+            <div class="gallery-item" 
+                 data-animation="Cup3DScene.mp4" 
+                 data-code="https://raw.githubusercontent.com/Krutik-Vanjara/manim_creation/main/cup_3d.py" 
+                 data-description="https://raw.githubusercontent.com/Krutik-Vanjara/manim_creation/main/cup3d.txt">
+                <img class="thumbnail" src="Cup3d.png" alt="Thumbnail 1">
+                <div class="overlay">Cup3DScene</div>
+            </div>
+            <!-- Animation 2 -->
+            <div class="gallery-item" 
+                 data-animation="SolveLinearEquation.mp4" 
+                 data-code="https://raw.githubusercontent.com/your-username/your-repo/main/animation2.py" 
+                 data-description="https://raw.githubusercontent.com/your-username/your-repo/main/description2.txt">
+                <img class="thumbnail" src="thumbnail2.jpg" alt="Thumbnail 2">
+                <div class="overlay">SolveLinearEquation</div>
+            </div>
         </div>
-        <!-- Animation 2 -->
-        <div class="gallery-item" 
-             data-animation="SolveLinearEquation.mp4" 
-             data-code="https://raw.githubusercontent.com/your-username/your-repo/main/animation2.py" 
-             data-description="https://raw.githubusercontent.com/your-username/your-repo/main/description2.txt">
-            <img class="thumbnail" src="thumbnail2.jpg" alt="Thumbnail 2">
-            <div class="overlay">SolveLinearEquation</div>
+        
+        <!-- Section 2 -->
+        <h2 class="section-header">Section 2</h2>
+        <div class="gallery">
+            <!-- Animation 3 -->
+            <div class="gallery-item" 
+                 data-animation="GraphLinearEquation3D.mp4" 
+                 data-code="https://raw.githubusercontent.com/your-username/your-repo/main/animation3.py" 
+                 data-description="https://raw.githubusercontent.com/your-username/your-repo/main/description3.txt">
+                <img class="thumbnail" src="thumbnail3.jpg" alt="Thumbnail 3">
+                <div class="overlay">GraphLinearEquation3D</div>
+            </div>
+            <!-- Animation 4 -->
+            <div class="gallery-item" 
+                 data-animation="Animation4.mp4" 
+                 data-code="https://raw.githubusercontent.com/your-username/your-repo/main/animation4.py" 
+                 data-description="https://raw.githubusercontent.com/your-username/your-repo/main/description4.txt">
+                <img class="thumbnail" src="thumbnail4.jpg" alt="Thumbnail 4">
+                <div class="overlay">Animation 4</div>
+            </div>
         </div>
-        <!-- Animation 3 -->
-        <div class="gallery-item" 
-             data-animation="GraphLinearEquation3D.mp4" 
-             data-code="https://raw.githubusercontent.com/your-username/your-repo/main/animation3.py" 
-             data-description="https://raw.githubusercontent.com/your-username/your-repo/main/description3.txt">
-            <img class="thumbnail" src="thumbnail3.jpg" alt="Thumbnail 3">
-            <div class="overlay">GraphLinearEquation3D</div>
-        </div>
+
     </div>
 
     <!-- Modal for showing video, code, and description -->
@@ -205,8 +234,6 @@
 
         galleryItems.forEach(item => {
             item.addEventListener('click', async () => {
-                console.log("Item clicked!"); // Debugging log
-                
                 const videoSrc = item.getAttribute('data-animation');
                 const codeFile = item.getAttribute('data-code');
                 const descriptionFile = item.getAttribute('data-description');
@@ -239,7 +266,7 @@
                     console.error('Error fetching description:', error);
                 }
 
-                modal.style.display = 'flex'; // Show modal
+                modal.style.display = 'flex';
             });
         });
 
@@ -248,19 +275,20 @@
             modalVideo.pause();
         }
 
-        // Copy code functionality
+        // Copy code button functionality
         copyBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(codeBlock.textContent)
                 .then(() => {
                     alert('Code copied to clipboard!');
                 })
                 .catch(err => {
-                    console.error('Failed to copy: ', err);
+                    console.error('Error copying code:', err);
                 });
         });
     </script>
 </body>
 </html>
+
 
 
 
