@@ -7,10 +7,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #ffffff, #000000); /* Black and white gradient */
+            background: linear-gradient(to bottom, #f0f0f0, #ffffff); /* Light gray to white gradient */
             margin: 0;
             padding: 0;
-            color: #ffffff; /* White text for contrast */
+            color: #333333; /* Dark gray text for better readability */
         }
         header {
             background: rgba(0, 0, 0, 0.85); /* Darker background with transparency */
@@ -26,12 +26,29 @@
             padding: 20px;
             height: 80vh; /* Adjust height based on content */
             overflow-y: auto; /* Enable scrolling */
+            position: relative; /* Enable positioning for scroll buttons */
+        }
+        .scroll-button {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007BFF; /* Blue button color */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 100; /* Ensure it's on top */
+            transition: background-color 0.3s ease;
+        }
+        .scroll-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
         }
         .section-header {
             font-size: 1.8rem;
             margin-bottom: 10px;
             text-align: center;
-            color: #ffffff; /* White text */
+            color: #333333; /* Dark gray text */
         }
         .gallery {
             display: grid;
@@ -43,7 +60,7 @@
             position: relative;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Lighter shadow */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -62,7 +79,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.5); /* White overlay for contrast */
+            background: rgba(255, 255, 255, 0.6); /* White overlay for contrast */
             opacity: 0;
             transition: opacity 0.3s ease;
             display: flex;
@@ -78,8 +95,8 @@
         footer {
             text-align: center;
             padding: 10px;
-            background: rgba(255, 255, 255, 0.1); /* Light transparent background */
-            color: #cccccc; /* Light gray text */
+            background: rgba(0, 0, 0, 0.1); /* Light transparent background */
+            color: #666666; /* Light gray text */
         }
         .modal {
             display: none;
@@ -123,7 +140,7 @@
             position: relative;
         }
         .copy-btn {
-            background-color: #000000; /* Black button */
+            background-color: #007BFF; /* Blue button */
             color: white;
             border: none;
             padding: 8px 12px;
@@ -160,6 +177,10 @@
 
     <!-- Main content area with scroll functionality -->
     <div class="main-content">
+        <!-- Scroll Up Button -->
+        <button class="scroll-button" id="scrollUp" onclick="scrollUp()">Scroll Up</button>
+        <!-- Scroll Down Button -->
+        <button class="scroll-button" id="scrollDown" onclick="scrollDown()" style="bottom: 10px;">Scroll Down</button>
         
         <!-- Section 1 -->
         <h2 class="section-header">Section 1</h2>
@@ -221,12 +242,7 @@
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Krutik Vanjara.</p>
-    </footer>
-
     <script>
-        // Modal functionality
         const galleryItems = document.querySelectorAll('.gallery-item');
         const modal = document.getElementById('animationModal');
         const modalVideo = document.getElementById('modalVideo');
@@ -236,13 +252,14 @@
 
         galleryItems.forEach(item => {
             item.addEventListener('click', async () => {
-                const videoSrc = item.getAttribute('data-animation');
+                const animationFile = item.getAttribute('data-animation');
                 const codeFile = item.getAttribute('data-code');
                 const descriptionFile = item.getAttribute('data-description');
 
-                modalVideo.src = videoSrc;
+                // Set the video source
+                modalVideo.src = animationFile;
 
-                // Fetch code from .py file (from GitHub raw link)
+                // Fetch code from .py file
                 try {
                     const codeResponse = await fetch(codeFile);
                     const codeText = await codeResponse.text();
@@ -281,9 +298,19 @@
                 alert('Code copied to clipboard!');
             });
         });
+
+        // Scroll functions
+        function scrollUp() {
+            document.querySelector('.main-content').scrollBy(0, -100); // Scroll up by 100px
+        }
+
+        function scrollDown() {
+            document.querySelector('.main-content').scrollBy(0, 100); // Scroll down by 100px
+        }
     </script>
 </body>
 </html>
+
 
 
 
