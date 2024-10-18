@@ -24,25 +24,6 @@
         }
         .main-content {
             padding: 20px;
-            height: 80vh; /* Adjust height based on content */
-            overflow-y: auto; /* Enable scrolling */
-            position: relative; /* Enable positioning for scroll buttons */
-        }
-        .scroll-button {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #007BFF; /* Blue button color */
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 100; /* Ensure it's on top */
-            transition: background-color 0.3s ease;
-        }
-        .scroll-button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
         }
         .section-header {
             font-size: 1.8rem;
@@ -51,12 +32,15 @@
             color: #333333; /* Dark gray text */
         }
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            padding: 20px;
+            display: flex;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            scroll-behavior: smooth; /* Smooth scrolling effect */
+            padding: 10px 0; /* Add padding for aesthetics */
         }
         .gallery-item {
+            flex: 0 0 auto; /* Prevent items from shrinking */
+            width: 250px; /* Fixed width for each item */
+            margin: 0 10px; /* Space between items */
             position: relative;
             border-radius: 8px;
             overflow: hidden;
@@ -158,8 +142,8 @@
             h1 {
                 font-size: 2rem;
             }
-            .gallery {
-                grid-template-columns: 1fr;
+            .gallery-item {
+                width: 180px; /* Adjust width for smaller devices */
             }
             .modal-content {
                 max-width: 90%;
@@ -175,13 +159,7 @@
         <h1>Manim Animations Gallery</h1>
     </header>
 
-    <!-- Main content area with scroll functionality -->
     <div class="main-content">
-        <!-- Scroll Up Button -->
-        <button class="scroll-button" id="scrollUp" onclick="scrollUp()">Scroll Up</button>
-        <!-- Scroll Down Button -->
-        <button class="scroll-button" id="scrollDown" onclick="scrollDown()" style="bottom: 10px;">Scroll Down</button>
-        
         <!-- Section 1 -->
         <h2 class="section-header">Section 1</h2>
         <div class="gallery">
@@ -298,18 +276,10 @@
                 alert('Code copied to clipboard!');
             });
         });
-
-        // Scroll functions
-        function scrollUp() {
-            document.querySelector('.main-content').scrollBy(0, -100); // Scroll up by 100px
-        }
-
-        function scrollDown() {
-            document.querySelector('.main-content').scrollBy(0, 100); // Scroll down by 100px
-        }
     </script>
 </body>
 </html>
+
 
 
 
