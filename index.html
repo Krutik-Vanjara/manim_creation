@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,13 +7,13 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #ffffff;
+            background: linear-gradient(to bottom, #ffffff, #000000); /* Black and white gradient */
             margin: 0;
             padding: 0;
-            color: #333333;
+            color: #ffffff; /* White text for contrast */
         }
         header {
-            background-color: #000000;
+            background: rgba(0, 0, 0, 0.85); /* Darker background with transparency */
             color: white;
             padding: 20px;
             text-align: center;
@@ -31,6 +31,7 @@
             font-size: 1.8rem;
             margin-bottom: 10px;
             text-align: center;
+            color: #ffffff; /* White text */
         }
         .gallery {
             display: grid;
@@ -42,7 +43,7 @@
             position: relative;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Lighter shadow */
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -61,13 +62,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.5); /* White overlay for contrast */
             opacity: 0;
             transition: opacity 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: black; /* Black text on white overlay */
             font-size: 1.5rem;
             text-transform: uppercase;
         }
@@ -77,8 +78,8 @@
         footer {
             text-align: center;
             padding: 10px;
-            background-color: #ffffff;
-            color: #666666;
+            background: rgba(255, 255, 255, 0.1); /* Light transparent background */
+            color: #cccccc; /* Light gray text */
         }
         .modal {
             display: none;
@@ -88,25 +89,26 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.85); /* Darker modal background */
             justify-content: center;
             align-items: center;
         }
         .modal-content {
-            background: #ffffff;
+            background: #ffffff; /* White background for modal */
             padding: 20px;
             border-radius: 8px;
             text-align: center;
             max-width: 80%;
             width: 100%;
             box-sizing: border-box;
+            color: black; /* Black text in modal */
         }
         #modalVideo {
             max-width: 100%;
             height: auto;
         }
         .close-btn {
-            background-color: #333333;
+            background-color: #333333; /* Dark button */
             color: white;
             border: none;
             padding: 10px;
@@ -114,14 +116,14 @@
             cursor: pointer;
         }
         .code-section {
-            background-color: #f0f0f0;
+            background-color: #f0f0f0; /* Light gray background for code section */
             padding: 15px;
             border-radius: 8px;
             text-align: left;
             position: relative;
         }
         .copy-btn {
-            background-color: #000000;
+            background-color: #000000; /* Black button */
             color: white;
             border: none;
             padding: 8px 12px;
@@ -243,51 +245,46 @@
                 // Fetch code from .py file (from GitHub raw link)
                 try {
                     const codeResponse = await fetch(codeFile);
-                    if (codeResponse.ok) {
-                        const codeText = await codeResponse.text();
-                        codeBlock.textContent = codeText;
-                    } else {
-                        console.error('Failed to fetch code:', codeResponse.statusText);
-                    }
+                    const codeText = await codeResponse.text();
+                    codeBlock.textContent = codeText;
                 } catch (error) {
                     console.error('Error fetching code:', error);
+                    codeBlock.textContent = 'Error fetching code.';
                 }
 
-                // Fetch description from .txt file (from GitHub raw link)
+                // Fetch description from .txt file
                 try {
                     const descriptionResponse = await fetch(descriptionFile);
-                    if (descriptionResponse.ok) {
-                        const descriptionText = await descriptionResponse.text();
-                        descriptionBlock.textContent = descriptionText;
-                    } else {
-                        console.error('Failed to fetch description:', descriptionResponse.statusText);
-                    }
+                    const descriptionText = await descriptionResponse.text();
+                    descriptionBlock.textContent = descriptionText;
                 } catch (error) {
                     console.error('Error fetching description:', error);
+                    descriptionBlock.textContent = 'Error fetching description.';
                 }
 
                 modal.style.display = 'flex';
+                modalVideo.play();
             });
         });
 
         function closeModal() {
             modal.style.display = 'none';
             modalVideo.pause();
+            modalVideo.src = ''; // Reset video source
+            codeBlock.textContent = ''; // Clear code
+            descriptionBlock.textContent = ''; // Clear description
         }
 
-        // Copy code button functionality
+        // Copy code to clipboard
         copyBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(codeBlock.textContent)
-                .then(() => {
-                    alert('Code copied to clipboard!');
-                })
-                .catch(err => {
-                    console.error('Error copying code:', err);
-                });
+            navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                alert('Code copied to clipboard!');
+            });
         });
     </script>
 </body>
 </html>
+
 
 
 
